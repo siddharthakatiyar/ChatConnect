@@ -1,0 +1,36 @@
+package com.chatconnect.backend.models;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "roles")
+public class Role {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer user_id;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(length = 20)
+	private UserType name;
+	
+	public Role() {
+		
+	}
+	
+	public Role(UserType role) {
+		this.name = role;
+	}
+
+	public Integer getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
+	}
+
+	public UserType getRole() {
+		return name;
+	}	
+}
