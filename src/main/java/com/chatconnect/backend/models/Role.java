@@ -8,7 +8,7 @@ public class Role {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer user_id;
+	private long user_id;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(length = 20)
@@ -22,11 +22,11 @@ public class Role {
 		this.name = role;
 	}
 
-	public Integer getUser_id() {
+	public long getUser_id() {
 		return user_id;
 	}
 
-	public void setUser_id(Integer user_id) {
+	public void setUser_id(long user_id) {
 		this.user_id = user_id;
 	}
 
