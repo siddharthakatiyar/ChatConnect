@@ -1,18 +1,23 @@
 package com.chatconnect.backend.payload.response;
 
+import java.time.LocalDateTime;
 import java.util.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class JwtResponse {
     private String token;
     private String type = "Bearer";
     private Long id;
     private String username;
+    private LocalDateTime expirationTime;
     // private List<String> roles;
 
     public JwtResponse(String newToken, Long newId, String newUsername) {
         this.token = newToken;
         this.id = newId;
         this.username = newUsername;
+        this.expirationTime = LocalDateTime.now().plusMinutes(60 * 24);
         // this.roles = newRoles;
     }
 

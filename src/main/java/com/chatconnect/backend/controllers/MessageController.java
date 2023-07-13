@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,7 @@ import com.chatconnect.backend.payload.requests.MessageRequest;
 import com.chatconnect.backend.payload.response.MessageResponse;
 import com.chatconnect.backend.repository.MessageRepository;
 import com.chatconnect.backend.repository.UserRepository;
+import com.chatconnect.backend.security.services.UserDetailsGet;
 
 import jakarta.validation.Valid;
 
@@ -32,24 +35,23 @@ public class MessageController {
     @Autowired
     UserRepository userRepository;
 
-    @PostMapping("/send")
-    public ResponseEntity<?> sendMessage(@Valid @RequestBody MessageRequest messageRequest) {
-        Message message = new Message(messageRequest.getMessage(), messageRequest.getSender_id(), messageRequest.getReceiver_id(), LocalDateTime.now());
+    @PostMapping("/post/{username}")
+    public ResponseEntity<?> sendMessage(@Valid @RequestBody MessageRequest messageRequest, @PathVariable String username) {
+        Message message = new Message(messageRequest.getMessage(), getCurrentUsername(), username);
         messageRepository.save(message);
 
         return ResponseEntity.ok(new MessageResponse("Message sent successfully!"));
     }
 
-    @GetMapping("/get/{id}/{id2}")
-    public Optional<Message> getMessages(@PathVariable long id, @PathVariable long id2) {
-        return messageRepository.findBySender_idAndReceiver_id(id, id2);
+    @GetMapping("/get/{username}")
+    public ResponseEntity<?> getMessages(@PathVariable String username) {
+        List<Message> messages = messageRepository.findMessages(getCurrentUsername(), username);
+        return ResponseEntity.ok(messages);
+    }   
+
+    public String getCurrentUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsGet userDetails = (UserDetailsGet) authentication.getPrincipal();
+        return userDetails.getUsername();
     }
-
-    // @GetMapping("/get")
-    // public List<Message> getMessages() {
-    //     return messageRepository.findAll();
-    // }
-
-
-    
 }

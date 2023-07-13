@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.chatconnect.backend.repository.UserRepository;
+
 @Entity
 @Table(name = "messages")
 public class Message {
@@ -14,24 +18,27 @@ public class Message {
     @Column(name = "message")
     private String message;
 
-    @Column(name = "sender_id")
-    private long sender_id;
+    @Column(name = "sender_username")
+    private String sender_username;
 
-    @Column(name = "receiver_id")
-    private long receiver_id;
+    @Column(name = "receiver_username")
+    private String receiver_username;
 
     @Column(name = "created_at")
     private LocalDateTime created_at;
+
+    // @Autowired
+    // private UserRepository userRepository;
 
     public Message() {
 
     }
 
-    public Message(String message, long sender_id, long receiver_id, LocalDateTime created_at) {
+    public Message(String message, String sender_username, String receiver_username) {
         this.message = message;
-        this.sender_id = sender_id;
-        this.receiver_id = receiver_id;
-        this.created_at = created_at;
+        this.sender_username = sender_username;
+        this.receiver_username = receiver_username;
+        this.created_at = LocalDateTime.now();
     }
 
     public long getMessage_id() {
@@ -42,12 +49,12 @@ public class Message {
         return message;
     }
 
-    public long getSender_id() {
-        return sender_id;
+    public String getSender_username() {
+        return sender_username;
     }
 
-    public long getReceiver_id() {
-        return receiver_id;
+    public String getReceiver_username() {
+        return receiver_username;
     }
 
     public void setMessage_id(long message_id) {
@@ -58,12 +65,12 @@ public class Message {
         this.message = message;
     }
 
-    public void setSender_id(long sender_id) {
-        this.sender_id = sender_id;
+    public void setSender_username(String sender_username) {
+        this.sender_username = sender_username;
     }
 
-    public void setReceiver_id(long receiver_id) {
-        this.receiver_id = receiver_id;
+    public void setReceiver_username(String receiver_username) {
+        this.receiver_username = receiver_username;
     }
 
     public LocalDateTime getCreated_at() {
