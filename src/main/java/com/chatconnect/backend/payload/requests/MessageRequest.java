@@ -1,10 +1,5 @@
 package com.chatconnect.backend.payload.requests;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-
-import com.chatconnect.backend.security.services.UserDetailsGet;
-
 import jakarta.validation.constraints.NotBlank;
 
 public class MessageRequest {

@@ -1,7 +1,5 @@
 package com.chatconnect.backend.payload.requests;
 
-import java.util.Set;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 

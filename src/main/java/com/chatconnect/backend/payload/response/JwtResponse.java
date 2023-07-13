@@ -1,9 +1,6 @@
 package com.chatconnect.backend.payload.response;
 
 import java.time.LocalDateTime;
-import java.util.*;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class JwtResponse {
     private String token;
@@ -51,6 +48,10 @@ public class JwtResponse {
 
     public String setUsername(String newUsername) {
         return this.username = newUsername;
+    }
+
+    public LocalDateTime getExpirationTime() {
+        return this.expirationTime;
     }
 
     // public List<String> getRoles() {
