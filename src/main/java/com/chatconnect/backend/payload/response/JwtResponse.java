@@ -1,7 +1,5 @@
 package com.chatconnect.backend.payload.response;
 
-import java.time.LocalDateTime;
-
 public class JwtResponse {
     private String token;
     private String type = "Bearer";
