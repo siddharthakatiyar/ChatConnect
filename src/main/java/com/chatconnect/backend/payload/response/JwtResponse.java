@@ -7,14 +7,14 @@ public class JwtResponse {
     private String type = "Bearer";
     private Long id;
     private String username;
-    private LocalDateTime expirationTime;
+    private Long validity;
     // private List<String> roles;
 
     public JwtResponse(String newToken, Long newId, String newUsername) {
         this.token = newToken;
         this.id = newId;
         this.username = newUsername;
-        this.expirationTime = LocalDateTime.now().plusMinutes(60 * 24);
+        this.validity = 1L * 60 * 60 * 24;
         // this.roles = newRoles;
     }
 
@@ -50,8 +50,8 @@ public class JwtResponse {
         return this.username = newUsername;
     }
 
-    public LocalDateTime getExpirationTime() {
-        return this.expirationTime;
+    public Long getValidity() {
+        return this.validity;
     }
 
     // public List<String> getRoles() {

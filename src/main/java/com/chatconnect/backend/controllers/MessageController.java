@@ -35,6 +35,9 @@ public class MessageController {
 
     @PostMapping("/post/{username}")
     public ResponseEntity<?> sendMessage(@Valid @RequestBody MessageRequest messageRequest, @PathVariable String username) {
+        if (!userRepository.existsByUsername(username)) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username does not exist!"));
+        }
         Message message = new Message(messageRequest.getMessage(), getCurrentUsername(), username);
         messageRepository.save(message);
 
@@ -43,9 +46,21 @@ public class MessageController {
 
     @GetMapping("/get/{username}")
     public ResponseEntity<?> getMessages(@PathVariable String username) {
+        if (!userRepository.existsByUsername(username)) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username does not exist!"));
+        }
         List<Message> messages = messageRepository.findMessages(getCurrentUsername(), username);
         return ResponseEntity.ok(messages);
-    }   
+    } 
+    
+    @GetMapping("/get/recent")
+    public ResponseEntity<?> getRecentContacts() {
+        List<String> recentContacts = messageRepository.findRecentContacts(getCurrentUsername());
+        if (recentContacts.isEmpty()) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: No recent contacts!"));
+        }
+        return ResponseEntity.ok(recentContacts);
+    }
 
     public String getCurrentUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
