@@ -1,5 +1,6 @@
 package com.chatconnect.backend.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chatconnect.backend.models.Message;
+import com.chatconnect.backend.models.MessageRead;
 import com.chatconnect.backend.payload.requests.MessageRequest;
 import com.chatconnect.backend.payload.response.MessageResponse;
 import com.chatconnect.backend.repository.MessageRepository;
@@ -50,7 +52,11 @@ public class MessageController {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username does not exist!"));
         }
         List<Message> messages = messageRepository.findMessages(getCurrentUsername(), username);
-        return ResponseEntity.ok(messages);
+        List<MessageRead> messageRead = new ArrayList<MessageRead>();
+        for (Message message : messages) {
+            messageRead.add(new MessageRead(message, getCurrentUsername()));
+        }
+        return ResponseEntity.ok(messageRead);
     } 
     
     @GetMapping("/get/recent")
