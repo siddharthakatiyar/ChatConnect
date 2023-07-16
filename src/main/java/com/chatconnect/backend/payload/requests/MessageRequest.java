@@ -6,6 +6,9 @@ public class MessageRequest {
     @NotBlank
     private String message;
 
+    @NotBlank
+    private String time;
+
     // @NotBlank
     private long receiver_id;
 
@@ -33,5 +36,13 @@ public class MessageRequest {
 
     public void setReceiver_id(long newReceiver_id) {
         this.receiver_id = newReceiver_id;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

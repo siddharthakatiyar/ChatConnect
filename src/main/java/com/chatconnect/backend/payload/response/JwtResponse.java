@@ -12,7 +12,7 @@ public class JwtResponse {
         this.token = newToken;
         this.id = newId;
         this.username = newUsername;
-        this.validity = 1L * 60 * 60 * 24;
+        this.validity = 60 * 60 * 24 * 1000L;
         // this.roles = newRoles;
     }
 

@@ -26,7 +26,7 @@ public class Message {
     private String receiver_username;
 
     @Column(name = "created_at")
-    private LocalDateTime created_at;
+    private String created_at;
 
     // @Autowired
     // private UserRepository userRepository;
@@ -35,11 +35,11 @@ public class Message {
 
     }
 
-    public Message(String message, String sender_username, String receiver_username) {
+    public Message(String message, String sender_username, String receiver_username, String created_at) {
         this.message = message;
         this.sender_username = sender_username;
         this.receiver_username = receiver_username;
-        this.created_at = LocalDateTime.now();
+        this.created_at = created_at;
     }
 
     public long getMessage_id() {
@@ -74,11 +74,11 @@ public class Message {
         this.receiver_username = receiver_username;
     }
 
-    public LocalDateTime getCreated_at() {
+    public String getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(LocalDateTime created_at) {
-        this.created_at = created_at;
+    public void setCreated_at(String newCreated_at) {
+        this.created_at = newCreated_at;
     }
 }
