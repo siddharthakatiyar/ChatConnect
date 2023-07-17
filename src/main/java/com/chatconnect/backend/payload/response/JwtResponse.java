@@ -6,14 +6,12 @@ public class JwtResponse {
     private Long id;
     private String username;
     private Long validity;
-    // private List<String> roles;
 
     public JwtResponse(String newToken, Long newId, String newUsername) {
         this.token = newToken;
         this.id = newId;
         this.username = newUsername;
         this.validity = 60 * 60 * 24 * 1000L;
-        // this.roles = newRoles;
     }
 
     public String getToken() {
@@ -51,12 +49,4 @@ public class JwtResponse {
     public Long getValidity() {
         return this.validity;
     }
-
-    // public List<String> getRoles() {
-    //     return this.roles;
-    // }
-
-    // public List<String> setRoles(List<String> newRoles) {
-    //     return this.roles = newRoles;
-    // }
 }

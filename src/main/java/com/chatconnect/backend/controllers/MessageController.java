@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chatconnect.backend.models.Message;
 import com.chatconnect.backend.models.MessageRead;
+import com.chatconnect.backend.models.UserRead;
 import com.chatconnect.backend.payload.requests.MessageRequest;
 import com.chatconnect.backend.payload.response.MessageResponse;
 import com.chatconnect.backend.repository.MessageRepository;
@@ -62,10 +63,11 @@ public class MessageController {
     @GetMapping("/get/recent")
     public ResponseEntity<?> getRecentContacts() {
         List<String> recentContacts = messageRepository.findRecentContacts(getCurrentUsername());
-        // if (recentContacts.isEmpty()) {
-        //     return ResponseEntity.badRequest().body(new MessageResponse("Error: No recent contacts!"));
-        // }
-        return ResponseEntity.ok(recentContacts);
+        List<UserRead> userRead = new ArrayList<UserRead>();
+        for (String username : recentContacts) {
+            userRead.add(new UserRead(username));
+        }
+        return ResponseEntity.ok(userRead);
     }
 
     public String getCurrentUsername() {

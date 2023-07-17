@@ -9,18 +9,11 @@ public class MessageRequest {
     @NotBlank
     private String time;
 
-    // @NotBlank
     private long receiver_id;
 
     public String getMessage() {
         return this.message;
     }
-
-    // public long getSender_id() {
-    //     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    //     UserDetailsGet userDetails = (UserDetailsGet) authentication.getPrincipal();
-    //     return userDetails.getUser_id();
-    // }
 
     public long getReceiver_id() {
         return this.receiver_id;
@@ -29,10 +22,6 @@ public class MessageRequest {
     public void setMessage(String newMessage) {
         this.message = newMessage;
     }
-
-    // public void setSender_id(long newSender_id) {
-    //     this.sender_id = newSender_id;
-    // }
 
     public void setReceiver_id(long newReceiver_id) {
         this.receiver_id = newReceiver_id;

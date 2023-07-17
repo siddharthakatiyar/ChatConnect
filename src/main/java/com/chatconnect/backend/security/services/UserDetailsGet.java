@@ -1,12 +1,9 @@
 package com.chatconnect.backend.security.services;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.chatconnect.backend.models.User;
@@ -26,21 +23,17 @@ public class UserDetailsGet implements UserDetails {
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserDetailsGet(Long user_id, String username, String firstName, String lastName, String password,
-			Collection<? extends GrantedAuthority> authorities) {
+	public UserDetailsGet(Long user_id, String username, String firstName, String lastName, String password) {
 		this.user_id = user_id;
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
-		this.authorities = authorities;
 	}
 
 	public static UserDetailsGet build(User user) {
-		List<GrantedAuthority> authorities = user.getRoles().stream()
-				.map(role -> new SimpleGrantedAuthority(role.getRole().name())).collect(Collectors.toList());
 		return new UserDetailsGet(user.getUser_id(), user.getUsername(), user.getFirst_name(), user.getLast_name(),
-				user.getPassword(), authorities);
+				user.getPassword());
 	}
 
 	@Override

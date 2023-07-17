@@ -19,7 +19,6 @@ import com.chatconnect.backend.payload.requests.LoginRequest;
 import com.chatconnect.backend.payload.requests.SignupRequest;
 import com.chatconnect.backend.payload.response.JwtResponse;
 import com.chatconnect.backend.payload.response.MessageResponse;
-import com.chatconnect.backend.repository.RoleRepository;
 import com.chatconnect.backend.repository.UserRepository;
 import com.chatconnect.backend.security.jwt.JwtUtils;
 import com.chatconnect.backend.security.services.UserDetailsGet;
@@ -37,9 +36,6 @@ public class AuthController {
 	UserRepository userRepository;
 
 	@Autowired
-	RoleRepository roleRepository;
-
-	@Autowired
 	PasswordEncoder encoder;
 
 	@Autowired
@@ -53,9 +49,14 @@ public class AuthController {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
 		UserDetailsGet userDetails = (UserDetailsGet) authentication.getPrincipal();
-		// List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
-		// 		.collect(Collectors.toList());
 		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUser_id(), userDetails.getUsername()));
+	}
+
+	@PostMapping("/logout")
+	@GetMapping("/logout")
+	public ResponseEntity<?> logoutUser() {
+		
+		return ResponseEntity.ok(new MessageResponse("User logged out successfully!"));
 	}
 
 	@PostMapping("/signup")
@@ -66,29 +67,6 @@ public class AuthController {
 		}
 		User user = new User(signUpRequest.getUsername(), signUpRequest.getFirstName(), signUpRequest.getLastName(),
 				encoder.encode(signUpRequest.getPassword()));
-		// Set<String> strRoles = signUpRequest.getRole();
-		// Set<Role> roles = new HashSet<>();
-		// if (strRoles == null) {
-		// 	Role userRole = roleRepository.findByName(UserType.ROLE_USER)
-		// 			.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-		// 	roles.add(userRole);
-		// } else {
-		// 	strRoles.forEach(role -> {
-		// 		switch (role) {
-		// 			case "admin":
-		// 				Role adminRole = roleRepository.findByName(UserType.ROLE_ADMIN)
-		// 						.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-		// 				roles.add(adminRole);
-		// 				break;
-		// 			default:
-		// 				Role userRole = roleRepository.findByName(UserType.ROLE_USER)
-		// 						.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-		// 				roles.add(userRole);
-		// 				break;
-		// 		}
-		// 	});
-		// }
-		// user.setRoles(roles);
 		userRepository.save(user);
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}

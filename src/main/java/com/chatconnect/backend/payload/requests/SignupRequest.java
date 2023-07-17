@@ -18,8 +18,6 @@ public class SignupRequest {
     @NotBlank
     private String lastName;
 
-    // private Set<String> role;
-
     public String getUsername() {
         return this.username;
     }
@@ -28,10 +26,6 @@ public class SignupRequest {
         return this.password;
     }
 
-    // public Set<String> getRole() {
-    //     return this.role;
-    // }
-
     public void setUsername(String newUsername) {
         this.username = newUsername;
     }
@@ -39,10 +33,6 @@ public class SignupRequest {
     public void setPassword(String newPassword) {
         this.password = newPassword;
     }
-
-    // public void setRole(Set<String> newRole) {
-    //     this.role = newRole;
-    // }
 
     public String getFirstName() {
         return this.firstName;

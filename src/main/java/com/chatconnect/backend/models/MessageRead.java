@@ -1,10 +1,8 @@
 package com.chatconnect.backend.models;
 
-import jakarta.persistence.Entity;
-
 public class MessageRead {
     private String message;
-    private String me;
+    private Boolean me;
     private String created_at;
 
     public MessageRead() {
@@ -19,14 +17,6 @@ public class MessageRead {
         this.message = message;
     }
 
-    public String getMe() {
-        return me;
-    }
-
-    public void setMe(String me) {
-        this.me = me;
-    }
-
     public String getCreated_at() {
         return created_at;
     }
@@ -37,7 +27,15 @@ public class MessageRead {
 
     public MessageRead(Message message, String me) {
         this.message = message.getMessage();
-        this.me = message.getSender_username() == me ? "true" : "false";
         this.created_at = message.getCreated_at();
+        this.me = message.getSender_username().equals(me);
+    }
+
+    public Boolean getMe() {
+        return me;
+    }
+
+    public void setMe(Boolean me) {
+        this.me = me;
     }
 }

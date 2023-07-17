@@ -28,9 +28,6 @@ public class Message {
     @Column(name = "created_at")
     private String created_at;
 
-    // @Autowired
-    // private UserRepository userRepository;
-
     public Message() {
 
     }
