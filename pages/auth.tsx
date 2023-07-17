@@ -1,6 +1,6 @@
+import SigninForm from '@/components/Auth/SigninForm';
+import SignupForm from '@/components/Auth/SignupForm';
 import { useState } from 'react';
-import SigninForm from '../components/SignInForm';
-import SignupForm from '../components/SignUpForm';
 
 const AuthenticationPage: React.FC = () => {
   const [isSigningUp, setIsSigningUp] = useState(true);

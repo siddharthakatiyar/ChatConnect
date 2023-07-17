@@ -32,10 +32,11 @@ const SigninForm: React.FC = () => {
             });
 
             if (response.ok) {
-                const { token, expirationTimestamp } = await response.json();
+                const { token, validity } = await response.json();
                 console.log('User logged in successfully');
                 localStorage.setItem('token', token);
-                localStorage.setItem('expirationTimestamp', expirationTimestamp);
+                localStorage.setItem('validity', validity);
+                localStorage.setItem('date', new Date().getTime().toString());
             } else {
                 console.log('Invalid credentials. Please try again.');
             }
