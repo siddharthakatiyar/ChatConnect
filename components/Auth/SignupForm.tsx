@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { PasswordStrength } from "./PasswordSignup";
+import {  useState } from "react";
 
 type SignupFormValues = {
     firstName: string;
@@ -92,7 +91,7 @@ const SignUpForm: React.FC = () => {
                         onChange={handleChange}
                     />
                 </div>
-                {/* <div>
+                <div>
                     <label htmlFor="password">Password:</label>
                     <input
                         type="password"
@@ -101,8 +100,7 @@ const SignUpForm: React.FC = () => {
                         value={formValues.password}
                         onChange={handleChange}
                     />
-                </div> */}
-                <PasswordStrength />
+                </div>
                 <div>
                     <label htmlFor="confirmPassword">Confirm Password:</label>
                     <input
