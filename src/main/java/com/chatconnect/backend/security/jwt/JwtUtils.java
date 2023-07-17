@@ -4,10 +4,13 @@ import java.security.Key;
 import java.util.Date;
 
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
+import com.chatconnect.backend.repository.JwtRepository;
 import com.chatconnect.backend.security.services.UserDetailsGet;
 
 import ch.qos.logback.classic.Logger;
@@ -18,6 +21,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Component
 public class JwtUtils {
@@ -28,6 +32,12 @@ public class JwtUtils {
 	
 	@Value("${chatconnect.app.jwtExpirationMs}")
 	private int jwtExpirationMs;
+
+	@Autowired
+	private HttpServletRequest request;
+
+	@Autowired
+	private JwtRepository jwtRepository;
 	
 	public String generateJwtToken(Authentication authentication) {
 		UserDetailsGet userPrincipal = (UserDetailsGet) authentication.getPrincipal();
@@ -48,6 +58,9 @@ public class JwtUtils {
 	
 	public boolean validateJwtToken(String authToken) {
 		try {
+			if (jwtRepository.existsByJwt(authToken)) {
+				return false;
+			}
 			Jwts.parserBuilder().setSigningKey(key()).build().parse(authToken);
 			return true;
 		} catch (MalformedJwtException e) {
@@ -60,5 +73,13 @@ public class JwtUtils {
 			logger.error("JWT claims that string is empty: {}", e.getMessage());
 		}
 		return false;
+	}
+
+	public String getJwtFromRequest() {
+		String headAuth = request.getHeader("Authorization");
+		if (StringUtils.hasText(headAuth) && headAuth.startsWith("Bearer ")) {
+			return headAuth.substring(7, headAuth.length());
+		}
+		return null;
 	}
 }

@@ -19,6 +19,7 @@ import com.chatconnect.backend.payload.requests.LoginRequest;
 import com.chatconnect.backend.payload.requests.SignupRequest;
 import com.chatconnect.backend.payload.response.JwtResponse;
 import com.chatconnect.backend.payload.response.MessageResponse;
+import com.chatconnect.backend.repository.JwtRepository;
 import com.chatconnect.backend.repository.UserRepository;
 import com.chatconnect.backend.security.jwt.JwtUtils;
 import com.chatconnect.backend.security.services.UserDetailsGet;
@@ -34,6 +35,9 @@ public class AuthController {
 
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	JwtRepository jwtRepository;
 
 	@Autowired
 	PasswordEncoder encoder;
@@ -55,7 +59,8 @@ public class AuthController {
 	@PostMapping("/logout")
 	@GetMapping("/logout")
 	public ResponseEntity<?> logoutUser() {
-		
+		String jwt = jwtUtils.getJwtFromRequest();
+		jwtRepository.save(new com.chatconnect.backend.models.JwtBlacklist(jwt));
 		return ResponseEntity.ok(new MessageResponse("User logged out successfully!"));
 	}
 
