@@ -9,22 +9,34 @@ public class MessageRequest {
     @NotBlank
     private String time;
 
-    private long receiver_id;
+    // @NotBlank
+    private String receiverUsername;
+
+    private String senderUsername;
+
+    public MessageRequest() {
+    }
+
+    public MessageRequest(String message, String time, String senderUsername) {
+        this.message = message;
+        this.time = time;
+        this.senderUsername = senderUsername;
+    }
 
     public String getMessage() {
         return this.message;
     }
 
-    public long getReceiver_id() {
-        return this.receiver_id;
+    public String getReceiverUsername() {
+        return this.receiverUsername;
     }
 
     public void setMessage(String newMessage) {
         this.message = newMessage;
     }
 
-    public void setReceiver_id(long newReceiver_id) {
-        this.receiver_id = newReceiver_id;
+    public void setReceiverUsername(String newreceiverUsername) {
+        this.receiverUsername = newreceiverUsername;
     }
 
     public String getTime() {
@@ -33,5 +45,13 @@ public class MessageRequest {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getSenderUsername() {
+        return senderUsername;
+    }
+
+    public void setSenderUsername(String newSenderUsername) {
+        this.senderUsername = newSenderUsername;
     }
 }
