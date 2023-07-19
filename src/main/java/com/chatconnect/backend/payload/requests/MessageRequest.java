@@ -9,7 +9,6 @@ public class MessageRequest {
     @NotBlank
     private String time;
 
-    // @NotBlank
     private String receiverUsername;
 
     private String senderUsername;
