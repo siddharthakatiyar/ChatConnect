@@ -23,7 +23,7 @@ export const ConversationProvider = ({ children }: ConversationProviderProps) =>
   }
 
   function setMessage( message: Message[] ) {
-    console.log(message);
+    // console.log(message);
     setMessageData(message)
   }
 

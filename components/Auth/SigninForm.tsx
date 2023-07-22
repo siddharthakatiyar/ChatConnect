@@ -1,3 +1,8 @@
+import {
+    Button, Input,
+    Spacer
+} from '@nextui-org/react';
+import router from 'next/router';
 import { useState } from 'react';
 
 type SigninFormValues = {
@@ -37,6 +42,8 @@ const SigninForm: React.FC = () => {
                 localStorage.setItem('token', token);
                 localStorage.setItem('validity', validity);
                 localStorage.setItem('date', new Date().getTime().toString());
+                localStorage.setItem('username', formValues.username);
+                router.push('/dashboard');
             } else {
                 console.log('Invalid credentials. Please try again.');
             }
@@ -50,30 +57,41 @@ const SigninForm: React.FC = () => {
 
 
     return (
+
         <div>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="username">Username:</label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        value={formValues.username}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formValues.password}
-                        onChange={handleChange}
-                    />
-                </div>
-                <button type="submit">Submit</button>
+                <Input
+                    name="username"
+                    value={formValues.username}
+                    onChange={handleChange}
+                    placeholder="Username"
+                    required
+                    width="100%"
+                    size="lg"
+                    css={{ mb: '10px' }}
+                />
+                <Spacer y={1} />
+                <Input.Password
+                    name="password"
+                    value={formValues.password}
+                    onChange={handleChange}
+                    placeholder="Password"
+                    required
+                    width="100%"
+                    size="lg"
+                    css={{ mb: '10px' }}
+                />
+                <Spacer y={1} />
+                <Button
+                    type="submit"
+                    color="secondary"
+                    size="lg"
+                    css={{ mb: '10px' }}
+                >
+                    Sign In
+                </Button>
             </form>
+
         </div>
     );
 };

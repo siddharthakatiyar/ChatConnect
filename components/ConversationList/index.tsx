@@ -7,6 +7,7 @@ import Get from "../MessageHandler/get";
 interface ConversationListProps {
   isFirstConversation?: boolean;
   data: RecentConversation
+  isNewChat?: boolean;
 }
 
 export default function ConversationList(props: ConversationListProps) {
@@ -21,10 +22,11 @@ export default function ConversationList(props: ConversationListProps) {
     username: username,
     messageHistory: messageHistory
   }
+  
 
   return (
     <div 
-      className="flex items-center w-full h-[4.5rem] bg-[#d1d1d1] pl-3 pr-4 hover:bg-[#2A3942] cursor-pointer"
+      className="flex items-center w-full h-[4.5rem] bg-[#f4f3f0] pl-3 pr-4 hover:bg-[#e1e0dd] cursor-pointer"
       onMouseMove={ () => seHover(true) }
       onMouseLeave={ () => seHover(false) }
       onClick={ () => setConversation(messageData) }
@@ -33,24 +35,10 @@ export default function ConversationList(props: ConversationListProps) {
         <Avatar  width="w-12" height="h-12" />
       </div>
       <div className="flex flex-col w-full">
-        <hr style={{borderTop: `${borderHeight} solid rgba(134,150,160,0.15)`}} />
+        <hr style={{borderTop: `${borderHeight} solid rgba(120,40,200,1)`}}/>
         <div className="flex py-2">
           <div className="flex flex-col w-full h-full ">
             <span className="overflow-y-hidden text-ellipsis text-black text-base">{username}<br></br><br></br></span>
-            {/* <span className="overflow-y-hidden text-ellipsis text-[#aebac1] text-sm">{lastMessage}</span> */}
-          </div>
-          <div className="flex flex-col w-auto text-[#aebac1]">
-            {/* <h1 className="text-xs">{lastTime}</h1> */}
-            {
-              isHover ? (
-                <span className="flex cursor-pointer h-full items-center justify-center">
-                  <svg viewBox="0 0 19 20" width="19" height="20" className="">
-                    <path fill="currentColor" d="m3.8 6.7 5.7 5.7 5.7-5.7 1.6 1.6-7.3 7.2-7.3-7.2 1.6-1.6z"></path>
-                  </svg>
-                </span>
-              ) : null
-            }
-            
           </div>
         </div>
       </div>

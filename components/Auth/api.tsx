@@ -1,5 +1,4 @@
 
-
 import router from "next/router";
 
 const makeAuthenticatedRequest = async (url: string, option: string, data?: any) => {
@@ -10,12 +9,12 @@ const makeAuthenticatedRequest = async (url: string, option: string, data?: any)
   
   const isTokenExpired = new Date().getTime() - Number(date) > Number(validity);
 
-  if (isTokenExpired) {
+  if (isTokenExpired || !token) {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('validity');
     localStorage.removeItem('date');
     router.push('/auth');
-    throw new Error('Token expired. Please log in again.');
+    // throw new Error('Token expired. Please log in again.');
   }
 
   const response = await fetch(url, {
@@ -27,8 +26,12 @@ const makeAuthenticatedRequest = async (url: string, option: string, data?: any)
     body: JSON.stringify(data),
   });
 
-  if (!response.ok) {
-    throw new Error('API request failed');
+  if (response.status === 401) {
+    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('validity');
+    localStorage.removeItem('date');
+    router.push('/auth');
+    // throw new Error('Token expired. Please log in again.');
   }
 
   return response.json();

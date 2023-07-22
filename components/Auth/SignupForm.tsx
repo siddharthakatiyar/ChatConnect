@@ -1,4 +1,9 @@
-import {  useState } from "react";
+import {
+    Button,
+    Input,
+    Spacer
+} from '@nextui-org/react';
+import { useState } from "react";
 
 type SignupFormValues = {
     firstName: string;
@@ -61,58 +66,71 @@ const SignUpForm: React.FC = () => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="firstName">First Name:</label>
-                    <input
-                        type="text"
-                        id="firstName"
-                        name="firstName"
-                        value={formValues.firstName}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="lastName">Last Name:</label>
-                    <input
-                        type="text"
-                        id="lastName"
-                        name="lastName"
-                        value={formValues.lastName}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="username">Username:</label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        value={formValues.username}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formValues.password}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="confirmPassword">Confirm Password:</label>
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        value={formValues.confirmPassword}
-                        onChange={handleChange}
-                    />
-                </div>
-                <button type="submit">Sign Up</button>
+                <Input
+                    name="FirstName"
+                    value={formValues.firstName}
+                    onChange={handleChange}
+                    placeholder="First Name"
+                    required
+                    width="100%"
+                    size="lg"
+                    css={{ mb: '10px' }}
+                />
+                <Spacer y={1} />
+                <Input
+                    name="LastName"
+                    value={formValues.lastName}
+                    onChange={handleChange}
+                    placeholder="Last Name"
+                    required
+                    width="100%"
+                    size="lg"
+                    css={{ mb: '10px' }}
+                />
+                <Spacer y={1} />
+                <Input
+                    name="username"
+                    value={formValues.username}
+                    onChange={handleChange}
+                    placeholder="Username"
+                    required
+                    width="100%"
+                    size="lg"
+                    css={{ mb: '10px' }}
+                />
+                <Spacer y={1} />
+                <Input.Password
+                    name="password"
+                    value={formValues.password}
+                    onChange={handleChange}
+                    placeholder="Password"
+                    required
+                    width="100%"
+                    size="lg"
+                    css={{ mb: '10px' }}
+                />
+                <Spacer y={1} />
+                <Input.Password
+                    name="confirmPassword"
+                    value={formValues.confirmPassword}
+                    onChange={handleChange}
+                    placeholder="Confirm Password"
+                    required
+                    width="100%"
+                    size="lg"
+                    css={{ mb: '10px' }}
+                />
+                <Spacer y={1} />
+                <Button
+                    type="submit"
+                    color="secondary"
+                    size="lg"
+                    css={{ mb: '10px' }}
+                >
+                    Sign Up
+                </Button>
             </form>
+
         </div>
     );
 }

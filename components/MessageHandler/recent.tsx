@@ -7,7 +7,6 @@ export default function Recent() {
     useEffect(() => {
         const fetchRecent = async () => {
             const response = await makeAuthenticatedRequest('/api/messages/get/recent', 'GET');
-            // console.log(response);
             setRecent(response);
         };
 

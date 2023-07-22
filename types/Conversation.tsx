@@ -9,11 +9,6 @@ interface Conversation {
     messageHistory: Message[];
 }
 
-// interface ConversationListData {
-//     username: string;
-//     messageHistory: Message[];
-// }
-
 interface RecentConversation {
     username: string;
 }
