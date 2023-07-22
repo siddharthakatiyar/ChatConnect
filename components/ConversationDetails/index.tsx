@@ -1,9 +1,8 @@
 import { KeyboardEvent, useContext, useEffect, useState } from "react";
 import { ConversationContext } from "../../context/ConversationContext";
+import { getSocket, initiateSocket } from "../../utils/websocket";
 import Avatar from "../Avatar";
 import MessageBalloon from "../MessageBalloon";
-import Send from "../MessageHandler/send";
-import { initiateSocket, getSocket } from "../../utils/websocket";
 
 export default function ConversationDetails() {
   const { conversation, message, setMessage } = useContext(ConversationContext);
