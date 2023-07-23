@@ -67,7 +67,7 @@ const SignUpForm: React.FC = () => {
         <div>
             <form onSubmit={handleSubmit}>
                 <Input
-                    name="FirstName"
+                    name="firstName"
                     value={formValues.firstName}
                     onChange={handleChange}
                     placeholder="First Name"
@@ -78,7 +78,7 @@ const SignUpForm: React.FC = () => {
                 />
                 <Spacer y={1} />
                 <Input
-                    name="LastName"
+                    name="lastName"
                     value={formValues.lastName}
                     onChange={handleChange}
                     placeholder="Last Name"
