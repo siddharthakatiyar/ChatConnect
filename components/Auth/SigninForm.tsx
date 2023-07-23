@@ -16,7 +16,7 @@ const SigninForm: React.FC = () => {
         password: '',
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: any) => {
         const { name, value } = e.target;
         setFormValues((prevFormValues) => ({
             ...prevFormValues,
@@ -43,7 +43,7 @@ const SigninForm: React.FC = () => {
                 localStorage.setItem('validity', validity);
                 localStorage.setItem('date', new Date().getTime().toString());
                 localStorage.setItem('username', formValues.username);
-                router.push('/dashboard');
+                router.push('/');
             } else {
                 console.log('Invalid credentials. Please try again.');
             }

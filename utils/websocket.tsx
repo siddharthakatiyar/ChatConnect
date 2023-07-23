@@ -1,11 +1,8 @@
 // utils/websocket.ts
-import io from 'socket.io-client';
 import router from "next/router";
+import io from 'socket.io-client';
 
-// Add the following line to import the type declaration
-import { Socket } from 'socket.io-client';
-
-let socket: Socket;
+let socket: any;
 
 interface websocketProps {
     username: string;

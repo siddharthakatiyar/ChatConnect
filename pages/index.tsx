@@ -11,7 +11,7 @@ export default function Home() {
         <img src="/logo.png" alt="logo" className="w-24 h-24" />
         <h1 className="text-[#161616] text-3xl font-extralight">Chat Connect</h1>
         <div className="flex flex-col mt-4 w-10/12 text-center text-[#3f484d] text-base font-light">
-          <h2>Welcome to Chat Connect, your go-to messaging application for instant and seamless communication. Whether you're staying in touch with friends, collaborating with colleagues, or connecting with family members, Chat Connect offers a user-friendly platform to keep your conversations flowing effortlessly.</h2>
+          <h2>Welcome to Chat Connect, your go-to messaging application for instant and seamless communication. Whether you are staying in touch with friends, collaborating with colleagues, or connecting with family members, Chat Connect offers a user-friendly platform to keep your conversations flowing effortlessly.</h2>
         </div>
       </div>
       

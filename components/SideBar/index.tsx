@@ -9,7 +9,7 @@ import Recent from "../MessageHandler/recent";
 export default function SideBar() {
   const conversationsList = Recent();
   const [search, setSearch] = useState("");
-  const filteredConversationsList = conversationsList.filter((conversation) => {
+  const filteredConversationsList = conversationsList.filter((conversation: any) => {
     return conversation.username.toLowerCase().includes(search.toLowerCase());
   });
 
@@ -24,7 +24,7 @@ export default function SideBar() {
     username: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormValues((prevFormValues) => ({
       ...prevFormValues,
@@ -35,7 +35,7 @@ export default function SideBar() {
   const handleSubmit = async () => {
     if (!formValues.username) return;
     if (formValues.username === localStorage.getItem("username")) return;
-    if (conversationsList.find((conversation) => conversation.username === formValues.username)) return;
+    if (conversationsList.find((conversation: any) => conversation.username === formValues.username)) return;
     const messageData = {
       username: formValues.username,
       messageHistory: []

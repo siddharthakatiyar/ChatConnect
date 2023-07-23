@@ -22,7 +22,7 @@ const SignUpForm: React.FC = () => {
         confirmPassword: '',
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: any) => {
         const { name, value } = e.target;
         setFormValues((prevFormValues) => ({
             ...prevFormValues,

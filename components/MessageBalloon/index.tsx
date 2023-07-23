@@ -14,17 +14,27 @@ export default function MessageBalloon(props: MessageBalloonProps) {
   const borderRounded = me ? "rounded-tr-none" : "rounded-tl-none";
   const textcolor = me ? "text-black" : "text-white";
 
-  useEffect(() => {
-    setTime(refreshTime());
-  }, [])
-
   function refreshTime() {
     const date = new Date(created_at);
     const hours = date.getHours();
     const minutes = date.getMinutes();
-
+    if (hours < 10 && minutes < 10) {
+      return `0${hours}:0${minutes}`;
+    }
+    if (hours < 10) {
+      return `0${hours}:${minutes}`;
+    }
+    if (minutes < 10) {
+      return `${hours}:0${minutes}`;
+    }
     return `${hours}:${minutes}`;
   }
+  
+  useEffect(() => {
+    setTime(refreshTime());
+  }, [])
+
+  
 
   return (
     <div className={`flex flex-col ${flexAlignItems} w-full h-max`}>
